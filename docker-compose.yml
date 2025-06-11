@@ -1,0 +1,17 @@
+name: ${ENV_PROJECT_NAME}
+
+
+services:
+  app:
+    container_name: ${ENV_PROJECT_NAME}-app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge

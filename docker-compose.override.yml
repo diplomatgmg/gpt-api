@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      context: .
+      target: ${ENV_MODE}
+      dockerfile: ./src/app/Dockerfile
+    volumes:
+      - ./src:/app/src
