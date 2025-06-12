@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from app.core.config import app_config
 
+
 app = FastAPI()
 
 
