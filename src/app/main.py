@@ -1,15 +1,16 @@
 from fastapi import FastAPI
+
 from app.core.config import app_config
 
 app = FastAPI()
 
 
 @app.get("/health")
-async def health_check():
+def health_check() -> dict[str, str]:
     return {"status": "healthy"}
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(
