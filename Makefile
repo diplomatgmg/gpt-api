@@ -5,3 +5,6 @@ help:
 
 up: ## compose up
 	@docker compose up --wait -d
+
+venv: ## Создает виртуальное окружение
+	@uv sync --frozen --no-install-project
