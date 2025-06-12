@@ -7,8 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
-    PYTHONPATH=/app \
-    PATH="/app/.venv/bin:$PATH"
+    PYTHONPATH=/app/src
 
 WORKDIR /app
 
@@ -23,7 +22,7 @@ COPY ./pyproject.toml ./uv.lock ./
 FROM base AS deps-dev
 
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-install-project --group app
+    uv sync --frozen --no-install-project
 
 
 # ================================= #
@@ -31,8 +30,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # ================================= #
 FROM deps-dev AS development
 
+COPY ./src ./src
+
 WORKDIR /app/src/app
 
-COPY ./ ./
-
-CMD ["python", "-m", "app.main"]
+CMD ["uv", "run", "main.py"]
