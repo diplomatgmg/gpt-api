@@ -2,10 +2,15 @@ from fastapi import FastAPI
 
 from app.core.config import app_config
 from common.environment.config import env_config
+from common.logging.config import log_config
+from common.logging.setup import setup_module_logging
 
+
+setup_module_logging("app")
 
 app = FastAPI(
     title=f"{env_config.project_name} API",
+    debug=env_config.debug,
     docs_url="/api/docs",
 )
 
@@ -22,5 +27,7 @@ if __name__ == "__main__":
         "main:app",
         host=app_config.host,
         port=app_config.port,
+        log_config=None,
+        log_level=log_config.level.lower(),
         reload=env_config.debug,
     )

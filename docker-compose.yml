@@ -6,6 +6,8 @@ services:
     container_name: ${ENV_PROJECT_NAME}-app
     ports:
       - "${APP_PORT}:${APP_PORT}"
+    volumes:
+      - app-logs:/app/logs
     env_file:
       - .env
     networks:
@@ -15,3 +17,6 @@ services:
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  app-logs:
