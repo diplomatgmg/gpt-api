@@ -26,7 +26,7 @@ unsafe-fixes = true
 line-length = 120
 lint.preview = true
 lint.select = ["ALL"]
-lint.ignore = ["I", "D", "CPY001", "COM812"]
+lint.ignore = ["I", "D", "DOC", "CPY001", "COM812"]
 
 [tool.mypy]
 plugins = "pydantic.mypy"

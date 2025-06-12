@@ -1,6 +1,8 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 
+from app.api.v1 import v1_router
 from app.core.config import app_config
+from app.dependencies import verify_api_key
 from common.environment.config import env_config
 from common.logging.config import log_config
 from common.logging.setup import setup_module_logging
@@ -13,6 +15,8 @@ app = FastAPI(
     debug=env_config.debug,
     docs_url="/api/docs",
 )
+
+app.include_router(v1_router, prefix="/api/v1", dependencies=[Depends(verify_api_key)])
 
 
 @app.get("/health")
